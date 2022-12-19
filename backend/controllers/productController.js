@@ -1,10 +1,10 @@
 const { restart } = require("nodemon");
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
-
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 
 //Create product- admin route
-exports.createProduct = async (req,res,next)=>{
+exports.createProduct = catchAsyncErrors(async (req,res,next)=>{
 
    const product = await Product.create(req.body);
 
@@ -12,10 +12,10 @@ exports.createProduct = async (req,res,next)=>{
       success:true,
       product 
    })
-}
+});
 
 // get all products
-exports.getAllProducts = async(req,res)=>{
+exports.getAllProducts = catchAsyncErrors(async(req,res)=>{
   
    const products = await Product.find();
    res.status(200).json({
@@ -23,10 +23,10 @@ exports.getAllProducts = async(req,res)=>{
       products
    
    });
-}
+});
 
 // get product details
-exports.getProductDetails = async(req,res,next)=>{
+exports.getProductDetails = catchAsyncErrors(async(req,res,next)=>{
 
    const product = await Product.findById(req.params.id);
 
@@ -39,11 +39,11 @@ exports.getProductDetails = async(req,res,next)=>{
       success:true,
       product
     })
-}
+});
 
 //update product -Admin
 
-exports.updateProduct = async(req,res,next)=>{
+exports.updateProduct = catchAsyncErrors(async(req,res,next)=>{
 
    let product = Product.findById(req.params.id);
 
@@ -64,11 +64,11 @@ exports.updateProduct = async(req,res,next)=>{
       success:true,
       product 
    })
-}
+});
 
 
 //Delete Product
-exports.deleteProduct = async(req,res,next)=>{
+exports.deleteProduct = catchAsyncErrors(async(req,res,next)=>{
 
    const product = await Product.findById(req.params.id);
 
@@ -83,5 +83,5 @@ exports.deleteProduct = async(req,res,next)=>{
       success:true,
       message: "Product Delete Successfully"
     })
-}
+});
 
