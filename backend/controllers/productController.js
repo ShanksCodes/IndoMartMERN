@@ -2,6 +2,7 @@ const { restart } = require("nodemon");
 const Product = require("../models/productModel");
 const ErrorHandler = require("../utils/errorhandler");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
+const ApiFeatures = require("../utils/apifeatures");
 
 //Create product- admin route
 exports.createProduct = catchAsyncErrors(async (req,res,next)=>{
@@ -17,7 +18,8 @@ exports.createProduct = catchAsyncErrors(async (req,res,next)=>{
 // get all products
 exports.getAllProducts = catchAsyncErrors(async(req,res)=>{
   
-   const products = await Product.find();
+   const apiFeature = new ApiFeatures(Product.find(),req.query).search().filter();
+   const products = await apiFeature.query;
    res.status(200).json({
       success:true,
       products
