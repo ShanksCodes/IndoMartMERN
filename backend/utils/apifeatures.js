@@ -13,7 +13,7 @@ class ApiFeatures{
             },
 
         }:{};
-        console.log(keyword);
+       // console.log(keyword);
         this.query = this.query.find({...keyword});
 
         return this;
@@ -21,14 +21,23 @@ class ApiFeatures{
 
     filter(){
 
-        const queryCopy = {...this.queryStr}
+        const queryCopy = {...this.queryStr};
       
         //removing some field for category
         const removeFields = ["keyword","page","limit"];
 
-        removeFields.forEach(key=>delete queryCopy[key]);
+        removeFields.forEach((key)=>delete queryCopy[key]);
+
+        //filter for price range and rating
+     //   console.log(queryCopy);
+        let queryStr = JSON.stringify(queryCopy);
+      //  queryStr = queryStr.replace(/\b(gt||gte||lt||lte)\b/g, (key) => `$${key}`);
+          queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (key) => `$${key}`);
+
        
-        this.query = this.query.find(queryCopy);
+        this.query = this.query.find(JSON.parse(queryStr));
+
+      //  console.log(queryStr);
         return this;
 
     }
