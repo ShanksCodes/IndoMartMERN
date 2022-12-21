@@ -7,4 +7,4 @@ router.route("/product/new").post(createProduct);
 router.route("/product/:id").put(updateProduct).delete(deleteProduct).get(getProductDetails);
 
 
-module.exports = router 
+module.exports = router
