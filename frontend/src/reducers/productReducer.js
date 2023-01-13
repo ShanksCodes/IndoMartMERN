@@ -43,22 +43,22 @@ export const productReducer=(state={products: []},action)=>{
             
             return{
                 loading:true,
-                product:[]
+                products:[],
             };
             
         case ALL_PRODUCT_SUCCESS:
             
             return{
                 loading:false,
-                product:action.payload.products,
-                productsCount:action.payload.products
+                products: action.payload.products,
+                productsCount: action.payload.products,
             };
            
         case ALL_PRODUCT_FAIL:
             
             return{
                 loading:false,
-                error:action.payload
+                error: action.payload,
             };
 
         case CLEAR_ERRORS:
