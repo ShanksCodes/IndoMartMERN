@@ -4,8 +4,8 @@ import Header from "./component/layout/Header/Header.js";
 //import { BrowserRouter as Router,Route} from 'react-router-dom';
 //import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 //import { BrowserRouter as Router, Route, Routes, Switch } from 'react-router-dom'
-import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-
+import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import ProductDetails from "./component/Product/ProductDetails.js";
 
 import WebFont from "webfontloader";
 import React from 'react';
@@ -30,6 +30,7 @@ function App() {
       <Header />
       <Routes>
       <Route exact path="/" element={<Home/>} />
+      <Route exact path="/product/:id" element={<ProductDetails/>} />
       
       </Routes>
       <Footer />
