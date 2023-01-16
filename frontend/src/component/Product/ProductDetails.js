@@ -1,10 +1,10 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState} from 'react';
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getProductDetails } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';  //EXTRA
-import reactStars from 'react-rating-stars-component';
+//import reactStars from 'react-rating-stars-component';
 import ReactStars from 'react-rating-stars-component';
 import playStore from '../../images/playstore.png';
 import cursor from '../../images/cursor.png';
@@ -27,9 +27,9 @@ const ProductDetails=({match})=>{
           alert.error(error);
           dispatch(clearErrors());
         }
-        dispatch(getProductDetails(params.id));
+        dispatch(getProductDetails(match.params.id));
 
-    },[dispatch,params.id, error, alert]);
+    },[dispatch,match.params.id, error, alert]);
 
     const options = {
         edit:false,
