@@ -16,18 +16,27 @@ exports.createProduct = catchAsyncErrors(async (req,res,next)=>{
    })
 });
 
-// get all products
+// get all product
 exports.getAllProducts = catchAsyncErrors(async(req,res,next)=>{
   // return next(new ErrorHandler("This is my temp error",500));
    const resultPerPage = 8;
    const productsCount = await Product.countDocuments();
-   const apiFeature = new ApiFeatures(Product.find(),req.query).search().filter().pagination(resultPerPage);
-   const products = await apiFeature.query;
+   const apiFeature = new ApiFeatures(Product.find(),req.query).search().filter();
+   
+  let products = await apiFeature.query;
+
+  let filteredProductsCount = products.length;
+
+  apiFeature.pagination(resultPerPage);
+
+  products = await apiFeature.query.clone();  //added clone() for latest mongoose version
+
    res.status(200).json({
       success:true,
       products,
       productsCount, //added thisssss
-      resultPerPage
+      resultPerPage,
+      filteredProductsCount,
    
    });
 });
