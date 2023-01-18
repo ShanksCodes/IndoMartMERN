@@ -13,7 +13,7 @@ import { useAlert } from "react-alert";
 
 
 
-const LoginSignUp = (history) => {
+const LoginSignUp = ({history}) => {
 
   const dispatch = useDispatch();  
   const alert = useAlert();
@@ -55,7 +55,7 @@ const LoginSignUp = (history) => {
     myForm.set("avatar", avatar);
     console.log("Sign up Form submitted");
 
-    //dispatch(register(myForm));
+    dispatch(register(myForm));
   };
 
   const registerDataChange = (e) => {
