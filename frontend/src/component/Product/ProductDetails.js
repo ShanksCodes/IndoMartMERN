@@ -12,6 +12,8 @@ import ReviewCard from "./ReviewCard.js";
 import Loader from "../layout/Loader/Loader";
 import { useAlert } from "react-alert";
 import MetaData from '../layout/MetaData';
+import { addItemsToCart } from "../../actions/cartAction";
+
 /*const ProductDetails=()=>{
     return <div>awgeageg</div>
 }*/
@@ -40,6 +42,31 @@ const ProductDetails=({match})=>{
         value:product.ratings,
         isHalf:true,
     
+    };
+
+    const [quantity, setQuantity] = useState(1);
+    const [open, setOpen] = useState(false);
+    const [rating, setRating] = useState(0);
+    const [comment, setComment] = useState("");
+  
+    const increaseQuantity = () => {
+      if (product.Stock <= quantity) return;
+  
+      const qty = quantity + 1;
+      setQuantity(qty);
+    };
+  
+    const decreaseQuantity = () => {
+      if (1 >= quantity) return;
+  
+      const qty = quantity - 1;
+      setQuantity(qty);
+    };
+
+
+    const addToCartHandler = () => {
+      dispatch(addItemsToCart(match.params.id, quantity));
+      alert.success("Item Added To Cart");
     };
 
     return( 
@@ -83,17 +110,20 @@ const ProductDetails=({match})=>{
                           <h1>{`₹${product.price}`}</h1>
                           <div className="detailsBlock-3-1">
                             <div className="detailsBlock-3-1-1">
-                              <button>-</button>
-                              <input value="1" type="number"/>
-                              <button>+</button>
-                            </div>{" "}
-                            <button>
+                            <button onClick={decreaseQuantity}>-</button>
+                            <input readOnly type="number" value={quantity} />
+                            <button onClick={increaseQuantity}>+</button>
+                            </div>
+                            <button
+                         //    disabled={product.Stock < 1 ? true : false}
+                             onClick={addToCartHandler}
+                            >
                               Add to Cart
                             </button>
                           </div>
           
                           <p>
-                            Status:{" "}
+                            Status:
                             <b className={product.Stock < 1 ? "redColor" : "greenColor"}>
                               {product.Stock < 1 ? "OutOfStock" : "InStock"}
                             </b>
