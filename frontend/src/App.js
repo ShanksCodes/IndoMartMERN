@@ -34,9 +34,6 @@ import Cart from "./component/Cart/Cart.js";
 
 
 
-
-
-
 function App() {
 
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -78,7 +75,7 @@ function App() {
 
       <Route exact path="/login" component={LoginSignUp} />
       <Route exact path="/cart" component={Cart} />
-      
+
 
 
 
