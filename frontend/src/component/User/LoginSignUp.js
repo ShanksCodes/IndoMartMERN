@@ -13,7 +13,7 @@ import { useAlert } from "react-alert";
 
 
 
-const LoginSignUp = ({history}) => {
+const LoginSignUp = ({history, location}) => {
 
   const dispatch = useDispatch();  
   const alert = useAlert();
@@ -76,6 +76,8 @@ const LoginSignUp = ({history}) => {
   };
 
 
+  const redirect = location.search ? location.search.split("=")[1] : "/account";
+
 useEffect(()=>{
     if (error) {
         alert.error(error);
@@ -84,10 +86,10 @@ useEffect(()=>{
 
       
     if (isAuthenticated) {
-        history.push("/account");  //////REDIRECTING TO /LOGIN IF IT GIVE ERROR LOOK HERE
+        history.push(redirect);  //////REDIRECTING TO /LOGIN IF IT GIVE ERROR LOOK HERE
       }
 
-},[dispatch,error,alert,history,isAuthenticated])
+},[dispatch,error,alert,history,isAuthenticated,redirect])
 
   const switchTabs = (e, tab) => {
     if (tab === "login") {

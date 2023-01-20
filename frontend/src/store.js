@@ -39,9 +39,9 @@ const reducer = combineReducers({
       cartItems: localStorage.getItem("cartItems")
         ? JSON.parse(localStorage.getItem("cartItems"))
         : [],
-    /*  shippingInfo: localStorage.getItem("shippingInfo")
+      shippingInfo: localStorage.getItem("shippingInfo")
         ? JSON.parse(localStorage.getItem("shippingInfo"))
-        : {},*/
+        : {},
     },
   };
   
