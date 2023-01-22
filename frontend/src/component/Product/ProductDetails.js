@@ -63,7 +63,6 @@ const ProductDetails=({match})=>{
       setQuantity(qty);
     };
 
-
     const addToCartHandler = () => {
       dispatch(addItemsToCart(match.params.id, quantity));
       alert.success("Item Added To Cart");
@@ -115,7 +114,7 @@ const ProductDetails=({match})=>{
                             <button onClick={increaseQuantity}>+</button>
                             </div>
                             <button
-                         //    disabled={product.Stock < 1 ? true : false}
+                             disabled={product.Stock < 1 ? true : false}
                              onClick={addToCartHandler}
                             >
                               Add to Cart
