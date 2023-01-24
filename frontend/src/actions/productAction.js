@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Link } from "react-router-dom";
 
 import {
   ALL_PRODUCT_FAIL,
@@ -32,33 +31,32 @@ import {
   CLEAR_ERRORS,
 } from "../constants/productConstants";
 
+// Get All Products
+export const getProduct =
+  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  async (dispatch) => {
+    try {
+      dispatch({ type: ALL_PRODUCT_REQUEST });
 
-//get all products
-export const getProduct=
-(keyword="",currentPage=1,price=[0,25000],category,ratings=0)=>async (dispatch)=>{
-    try{
-     
-    dispatch({
-        type:ALL_PRODUCT_REQUEST });
-        let link=`/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
-        if (category) {
-          link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
-        }
-        const {data} = await axios.get(link);
+      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
 
-        dispatch({
-            type:ALL_PRODUCT_SUCCESS,
-            payload:data,
-        })
-    }catch (error){
+      if (category) {
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+      }
 
-        dispatch({
-            type:ALL_PRODUCT_FAIL,
-            payload: error.response.data.message,
-        });
+      const { data } = await axios.get(link);
+
+      dispatch({
+        type: ALL_PRODUCT_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ALL_PRODUCT_FAIL,
+        payload: error.response.data.message,
+      });
     }
-};
-
+  };
 
 // Get All Products For Admin
 export const getAdminProduct = () => async (dispatch) => {
@@ -113,7 +111,6 @@ export const updateProduct = (id, productData) => async (dispatch) => {
 
     const config = {
       headers: { "Content-Type": "application/json" },
-    // headers: { "Content-Type": "multiform/form-data" },
     };
 
     const { data } = await axios.put(
@@ -153,29 +150,24 @@ export const deleteProduct = (id) => async (dispatch) => {
   }
 };
 
-
-
-
 // Get Products Details
 export const getProductDetails = (id) => async (dispatch) => {
-    try {
-      dispatch({ type: PRODUCT_DETAILS_REQUEST });
-  
-      const { data } = await axios.get(`/api/v1/product/${id}`);
-  
-      dispatch({
-        type: PRODUCT_DETAILS_SUCCESS,
-        payload: data.product,
-      });
-    } catch (error) {
-      dispatch({
-        type: PRODUCT_DETAILS_FAIL,
-        payload: error.response.data.message,
-      });
-    }
-  };
+  try {
+    dispatch({ type: PRODUCT_DETAILS_REQUEST });
 
+    const { data } = await axios.get(`/api/v1/product/${id}`);
 
+    dispatch({
+      type: PRODUCT_DETAILS_SUCCESS,
+      payload: data.product,
+    });
+  } catch (error) {
+    dispatch({
+      type: PRODUCT_DETAILS_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
 // NEW REVIEW
 export const newReview = (reviewData) => async (dispatch) => {
@@ -200,10 +192,47 @@ export const newReview = (reviewData) => async (dispatch) => {
   }
 };
 
+// Get All Reviews of a Product
+export const getAllReviews = (id) => async (dispatch) => {
+  try {
+    dispatch({ type: ALL_REVIEW_REQUEST });
 
+    const { data } = await axios.get(`/api/v1/reviews?id=${id}`);
 
-//clear errors
-export const clearErrors=()=>async (dispatch)=>{
- dispatch({type:CLEAR_ERRORS});
+    dispatch({
+      type: ALL_REVIEW_SUCCESS,
+      payload: data.reviews,
+    });
+  } catch (error) {
+    dispatch({
+      type: ALL_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
 
+// Delete Review of a Product
+export const deleteReviews = (reviewId, productId) => async (dispatch) => {
+  try {
+    dispatch({ type: DELETE_REVIEW_REQUEST });
+
+    const { data } = await axios.delete(
+      `/api/v1/reviews?id=${reviewId}&productId=${productId}`
+    );
+
+    dispatch({
+      type: DELETE_REVIEW_SUCCESS,
+      payload: data.success,
+    });
+  } catch (error) {
+    dispatch({
+      type: DELETE_REVIEW_FAIL,
+      payload: error.response.data.message,
+    });
+  }
+};
+
+// Clearing Errors
+export const clearErrors = () => async (dispatch) => {
+  dispatch({ type: CLEAR_ERRORS });
 };

@@ -44,13 +44,10 @@ import OrderList from "./component/Admin/OrderList.js";
 import ProcessOrder from "./component/Admin/ProcessOrder.js";
 import UsersList from "./component/Admin/UsersList.js";
 import UpdateUser from "./component/Admin/UpdateUser.js";
-//import ProductReviews from "./component/Admin/ProductReviews.js";
+import ProductReviews from "./component/Admin/ProductReviews.js";
 //import Contact from "./component/layout/Contact/Contact.js";
 //import About from "./component/layout/About/About.js";
 //import NotFound from "./component/layout/Not Found/NotFound.js";
-
-
-
 
 
 
@@ -184,6 +181,13 @@ function App() {
           path="/admin/user/:id"
           isAdmin={true}
           component={UpdateUser}
+        />
+
+        <ProtectedRoute
+          exact
+          path="/admin/reviews"
+          isAdmin={true}
+          component={ProductReviews}
         />
 
 
