@@ -39,9 +39,8 @@ const reducer = combineReducers({
     newProduct: newProductReducer,
     product: productReducer,
     allOrders: allOrdersReducer,
-   
-  //  allUsers: allUsersReducer,
- //   userDetails: userDetailsReducer,
+    allUsers: allUsersReducer,
+    userDetails: userDetailsReducer,
  //   productReviews: productReviewsReducer,
    // review: reviewReducer,
   });

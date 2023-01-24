@@ -40,6 +40,17 @@ import Dashboard from "./component/Admin/Dashboard.js";
 import ProductList from "./component/Admin/ProductList.js";
 import NewProduct from "./component/Admin/NewProduct";
 import UpdateProduct from "./component/Admin/UpdateProduct.js";
+import OrderList from "./component/Admin/OrderList.js";
+import ProcessOrder from "./component/Admin/ProcessOrder.js";
+import UsersList from "./component/Admin/UsersList.js";
+import UpdateUser from "./component/Admin/UpdateUser.js";
+//import ProductReviews from "./component/Admin/ProductReviews.js";
+//import Contact from "./component/layout/Contact/Contact.js";
+//import About from "./component/layout/About/About.js";
+//import NotFound from "./component/layout/Not Found/NotFound.js";
+
+
+
 
 
 
@@ -146,6 +157,34 @@ function App() {
           isAdmin={true}
           component={UpdateProduct}
         />  
+
+        <ProtectedRoute
+          exact
+          path="/admin/orders"
+          isAdmin={true}
+          component={OrderList}
+        />
+
+         <ProtectedRoute
+          exact
+          path="/admin/order/:id"
+          isAdmin={true}
+          component={ProcessOrder}
+        />
+
+         <ProtectedRoute
+          exact
+          path="/admin/users"
+          isAdmin={true}
+          component={UsersList}
+        />
+
+         <ProtectedRoute
+          exact
+          path="/admin/user/:id"
+          isAdmin={true}
+          component={UpdateUser}
+        />
 
 
 
