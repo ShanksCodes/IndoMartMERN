@@ -103,6 +103,9 @@ function App() {
     
 
       <Route exact path="/search" component={Search} />
+      <Route exact path="/contact" component={Contact} />
+
+       <Route exact path="/about" component={About} />
       <ProtectedRoute exact path="/account" component={Profile} />
       <ProtectedRoute exact path="/me/update" component={UpdateProfile} />
       
@@ -188,6 +191,12 @@ function App() {
           path="/admin/reviews"
           isAdmin={true}
           component={ProductReviews}
+        />
+
+        <Route
+          component={
+            window.location.pathname === "/process/payment" ? null : NotFound
+          }
         />
 
 
