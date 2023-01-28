@@ -83,9 +83,6 @@ function App() {
     getStripeApiKey();
   },[]);
 
-  window.addEventListener("contextmenu", (e) => e.preventDefault());
-
-
   return (
       <Router>
       <Header />

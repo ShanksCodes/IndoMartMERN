@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { clearErrors, getProduct } from "../../actions/productAction";
 import Loader from "../layout/Loader/Loader";
 import ProductCard from "../Home/ProductCard";
-import { useParams } from 'react-router-dom';
+//import { useParams } from 'react-router-dom';
 import Pagination from "react-js-pagination";
 import Slider from "@material-ui/core/Slider";
 import { useAlert } from "react-alert";
@@ -35,7 +35,7 @@ const Products=({match})=>{
 
 
 
-    const params = useParams(); //EXTRA
+   // const params = useParams(); //EXTRA
     const {products, loading, error, productsCount, resultPerPage, filteredProductsCount} = useSelector((state)=>state.products);
 
     const keyword= match.params.keyword;
