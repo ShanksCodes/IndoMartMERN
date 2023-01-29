@@ -121,6 +121,14 @@
 .detailsBlock-4 > p {
   color: rgba(0, 0, 0, 0.534);
   font: 300 0.8vmax sans-serif;
+  word-wrap: break-word;
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  flex:none;
+  flex-direction:column;
+  width: 30vmax;
+
+
 }
 
 .submitReview {

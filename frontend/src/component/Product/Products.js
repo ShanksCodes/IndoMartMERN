@@ -13,10 +13,10 @@ import MetaData from "../layout/MetaData";
 
 const categories = [
   "Laptop",
-  "Footwear",
-  "Bottom",
-  "Tops",
-  "Attire",
+ // "Footwear",
+  "Games",
+  "Plushies",
+  "Household",
   "Camera",
   "SmartPhones",
 ];
@@ -29,7 +29,7 @@ const Products=({match})=>{
     const alert = useAlert();
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [price, setPrice] = useState([0, 25000]);
+    const [price, setPrice] = useState([0, 55000]);
     const [category, setCategory] = useState("");
     const [ratings, setRatings] = useState(0);
 
@@ -73,11 +73,12 @@ const Products=({match})=>{
             <Typography>Price</Typography>
             <Slider
               value={price}
-              onChange={priceHandler}
-              valueLabelDisplay="auto"
+              track={false}
+              onChangeCommitted={priceHandler}
+              valueLabelDisplay="hover"
               aria-labelledby="range-slider"
               min={0}
-              max={25000}
+              max={55000}
             />
             <Typography>Categories</Typography>
             <ul className="categoryBox">
@@ -96,11 +97,12 @@ const Products=({match})=>{
               <Typography component="legend">Ratings Above</Typography>
               <Slider
                 value={ratings}
-                onChange={(e, newRating) => {
+                track={false}
+                onChangeCommitted={(e, newRating) => {
                   setRatings(newRating);
                 }}
                 aria-labelledby="continuous-slider"
-                valueLabelDisplay="auto"
+                valueLabelDisplay="hover"
                 min={0}
                 max={5}
               />
